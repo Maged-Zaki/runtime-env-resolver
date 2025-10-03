@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Maged-Zaki/runtime-env-resolver/compare/v1.0.1...v1.1.0) (2025-10-03)
+
+
+### Features
+
+* return resolved env variables as object ([5880914](https://github.com/Maged-Zaki/runtime-env-resolver/commit/58809149d487ae6413761669bfd0d6ed8c032688))
+
 ## [1.0.0](https://github.com/Maged-Zaki/remote-env-resolver/compare/v0.3.0...v1.0.0) (2025-10-02)
 
 
