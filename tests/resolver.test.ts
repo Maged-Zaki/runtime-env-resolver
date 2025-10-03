@@ -1,5 +1,5 @@
 import { resolveEnvVariables } from '../src/resolver';
-import type { ResolverProvider } from '../src/types';
+import type { ResolverProvider, Logger } from '../src/types';
 
 describe('Resolver', () => {
 	const store = {
@@ -21,13 +21,22 @@ describe('Resolver', () => {
 		},
 	};
 
-	process.env = {
-		NON_SENSITIVE_VAR: 'non-sensitive',
-		DB_PASSWORD: 'remoteVar:dbPassword',
-		CONNECTION_STRING: 'remoteVar:connectionString',
-		NON_SENSITIVE_VAR2: 'non-sensitive2',
-		REDIS_PASSWORD: 'remoteVar:redisPassword',
+	const mockLogger: Logger = {
+		error: jest.fn(),
+		warn: jest.fn(),
+		info: jest.fn(),
+		debug: jest.fn(),
 	};
+
+	beforeEach(() => {
+		process.env = {
+			NON_SENSITIVE_VAR: 'non-sensitive',
+			DB_PASSWORD: 'remoteVar:dbPassword',
+			CONNECTION_STRING: 'remoteVar:connectionString',
+			NON_SENSITIVE_VAR2: 'non-sensitive2',
+			REDIS_PASSWORD: 'remoteVar:redisPassword',
+		};
+	});
 
 	it('should resolve variables', async () => {
 		await resolveEnvVariables(provider);
@@ -37,5 +46,19 @@ describe('Resolver', () => {
 		expect(process.env.CONNECTION_STRING).toBe(store.connectionString);
 		expect(process.env.NON_SENSITIVE_VAR2).toBe('non-sensitive2');
 		expect(process.env.REDIS_PASSWORD).toBe(store.redisPassword);
+	});
+
+	it('should use custom logger when provided', async () => {
+		await resolveEnvVariables(provider, { logger: mockLogger });
+
+		expect(mockLogger.info).toHaveBeenCalledWith('Resolved 3 environment variable(s): DB_PASSWORD, CONNECTION_STRING, REDIS_PASSWORD');
+	});
+
+	it('should disable logging when logging is false', async () => {
+		jest.resetAllMocks();
+
+		await resolveEnvVariables(provider, { logging: false, logger: mockLogger });
+
+		expect(mockLogger.info).not.toHaveBeenCalled();
 	});
 });

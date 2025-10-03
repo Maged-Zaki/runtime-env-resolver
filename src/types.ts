@@ -13,9 +13,32 @@ export interface ResolverProvider {
 	resolve(values: string[]): Promise<string[]>;
 }
 
+export interface Logger {
+	/**
+	 * Log an error message
+	 */
+	error(message: string): void;
+	/**
+	 * Log a warning message
+	 */
+	warn(message: string): void;
+	/**
+	 * Log an info message
+	 */
+	info(message: string): void;
+	/**
+	 * Log a debug message
+	 */
+	debug(message: string): void;
+}
+
 export interface ResolveEnvOptions {
 	/**
 	 * enable/disable logging. Defaults to `true`
 	 */
 	logging?: boolean;
+	/**
+	 * Custom logger instance. If not provided, a default console logger will be used.
+	 */
+	logger?: Logger;
 }

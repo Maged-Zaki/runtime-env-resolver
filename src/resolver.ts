@@ -1,4 +1,5 @@
 import type { ResolveEnvOptions, ResolverProvider } from './types.js';
+import { ConsoleLogger } from './logger';
 
 /**
  * Resolve environment variables using the given provider.
@@ -9,8 +10,9 @@ import type { ResolveEnvOptions, ResolverProvider } from './types.js';
  * @param options Optional settings for the resolver
  * @returns An object containing the resolved environment variables
  */
+
 export async function resolveEnvVariables(provider: ResolverProvider, options: ResolveEnvOptions = {}): Promise<Record<string, string>> {
-	const { logging = true } = options;
+	const { logging = true, logger = new ConsoleLogger() } = options;
 
 	// Collect keys and values that need resolution
 	const resolvableKeys: string[] = [];
@@ -33,7 +35,7 @@ export async function resolveEnvVariables(provider: ResolverProvider, options: R
 
 	// Nothing to resolve
 	if (resolvableKeys.length === 0 && logging) {
-		console.log('No environment variables needed resolution.');
+		logger.info('No environment variables needed resolution.');
 		return {};
 	}
 
@@ -52,7 +54,7 @@ export async function resolveEnvVariables(provider: ResolverProvider, options: R
 	}
 
 	if (logging) {
-		console.log(`Resolved ${resolvableKeys.length} environment variable(s): ${resolvableKeys.join(', ')}`);
+		logger.info(`Resolved ${resolvableKeys.length} environment variable(s): ${resolvableKeys.join(', ')}`);
 	}
 
 	return resolvedObj;
