@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Maged-Zaki/runtime-env-resolver/compare/v1.1.0...v1.2.0) (2025-10-03)
+
+
+### Features
+
+* add logger interface and injection to resolveEnvVariables ([#2](https://github.com/Maged-Zaki/runtime-env-resolver/issues/2)) ([cb3e52a](https://github.com/Maged-Zaki/runtime-env-resolver/commit/cb3e52a6c5fccd3091a461dfdada0db6736b7166))
+
 ## [1.1.0](https://github.com/Maged-Zaki/runtime-env-resolver/compare/v1.0.1...v1.1.0) (2025-10-03)
 
 
