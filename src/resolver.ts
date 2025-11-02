@@ -1,5 +1,5 @@
 import type { ResolveEnvOptions, ResolverProvider } from './types.js';
-import { ConsoleLogger } from './logger';
+import { ConsoleLogger } from './logger.js';
 
 /**
  * Resolve environment variables using the given provider.
