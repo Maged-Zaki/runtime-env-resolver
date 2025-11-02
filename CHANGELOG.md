@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/Maged-Zaki/runtime-env-resolver/compare/v1.2.0...v1.2.1) (2025-11-02)
+
+
+### Bug Fixes
+
+* resolve ESM module resolution error and update Jest config ([04a64db](https://github.com/Maged-Zaki/runtime-env-resolver/commit/04a64db1a45bfdcbe85dbe1fc4aee98398df9d3d))
+
 ## [1.2.0](https://github.com/Maged-Zaki/runtime-env-resolver/compare/v1.1.0...v1.2.0) (2025-10-03)
 
 
